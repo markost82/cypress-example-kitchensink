@@ -18,16 +18,16 @@
 //  - pass Docker socket which allows Jenkins to start worker containers
 //  - download and execute the latest BlueOcean Docker image
 
-// docker run \
-//   -u root \
-//   -d \
-//   --name blue-ocean \
-//   -p 8080:8080 \
-//   -v jenkins-data:/var/jenkins_home \
-//   -v npm-cache:/root/.npm \
-//   -v cypress-cache:/root/.cache \
-//   -v /var/run/docker.sock:/var/run/docker.sock \
-//   jenkinsci/blueocean:latest
+docker run \
+  -u root \
+  -d \
+  --name blue-ocean \
+  -p 8080:8080 \
+  -v jenkins-data:/var/jenkins_home \
+  -v npm-cache:/root/.npm \
+  -v cypress-cache:/root/.cache \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  jenkinsci/blueocean:latest
 
 // If you start for the very first time, inspect the logs from the running container
 // to see Administrator password - you will need it to configure Jenkins via localhost:8080 UI
