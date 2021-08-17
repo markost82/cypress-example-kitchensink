@@ -70,7 +70,7 @@ pipeline {
         // to record we need to set an environment variable
         // we can load the record key variable from credentials store
         // see https://jenkins.io/doc/book/using/using-credentials/
-        CYPRESS_RECORD_KEY = credentials('cfefa4e76-a70e-4688-a4a9-35550f9dbb3e')
+        CYPRESS_RECORD_KEY = credentials('fefa4e76-a70e-4688-a4a9-35550f9dbb3e')
         // because parallel steps share the workspace they might race to delete
         // screenshots and videos folders. Tell Cypress not to delete these folders
         CYPRESS_trashAssetsBeforeRuns = 'false'
@@ -96,6 +96,19 @@ pipeline {
         }
       }
 
+    }
+  }
+
+  post {
+    // shutdown the server running in the background
+    always {
+      script {
+          if (getContext(hudson.FilePath)) {
+            deleteDir()
+          }
+      }
+      echo 'Stopping local server'
+      sh 'pkill -f http-server'
     }
   }
 }
