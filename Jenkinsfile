@@ -98,17 +98,4 @@ pipeline {
 
     }
   }
-
-  post {
-    // shutdown the server running in the background
-    always {
-      script {
-          if (getContext(hudson.FilePath)) {
-            deleteDir()
-          }
-      }
-      echo 'Stopping local server'
-      sh 'pkill -f http-server'
-    }
-  }
 }
