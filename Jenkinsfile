@@ -34,6 +34,10 @@
 //    docker logs blue-ocean
 
 pipeline {
+  environment {
+    REPO_PATH='/home/manish/Desktop'
+  }
+
   agent {
     // this image provides everything needed to run Cypress
     docker {
@@ -102,6 +106,11 @@ pipeline {
   post {
     // shutdown the server running in the background
     always {
+      script {
+          if (getContext(hudson.FilePath)) {
+            deleteDir()
+          }
+      }
       echo 'Stopping local server'
       sh 'pkill -f http-server'
     }
