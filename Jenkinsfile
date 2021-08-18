@@ -34,14 +34,10 @@
 //    docker logs blue-ocean
 
 pipeline {
-  environment {
-    REPO_PATH='/home/manish/Desktop'
-  }
-
   agent {
     // this image provides everything needed to run Cypress
     docker {
-      image 'cypress/base:10'
+      image 'cypress/base:14'
     }
   }
 
